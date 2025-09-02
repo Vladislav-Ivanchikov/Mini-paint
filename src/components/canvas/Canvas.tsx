@@ -33,7 +33,7 @@ const Canvas: React.FC = () => {
     saveImageURL,
   } = useActions();
 
-  let img: HTMLImageElement;
+  let img: HTMLImageElement = new Image();
 
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current;
@@ -45,6 +45,7 @@ const Canvas: React.FC = () => {
     ctxRef.current = ctx;
     canvasAction(canvasRef);
     ctxAction(ctxRef);
+    // eslint-disable-next-line
   }, [strokeColor, fillColor, lineWidth]);
 
   const startDrawing = ({ nativeEvent }: React.MouseEvent) => {

@@ -11,6 +11,6 @@ export const findReq = (findReq: string) => {
 export const filtredUsers = (arr: UsersDataType[], find: string) => {
   return {
     type: DataTypes.FILTRED_USERS,
-    payload: arr.filter((item) => item.username === find),
+    payload: arr.filter((item) => item.username.toLowerCase().includes(find)),
   };
 };

@@ -28,6 +28,11 @@ export const NotFoundWrap = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+
+  @media ${({ theme }) => theme.media.medium} {
+    margin-top: 30%;
+    position: static;
+  }
 `;
 
 export const PicText = styled(Text)`

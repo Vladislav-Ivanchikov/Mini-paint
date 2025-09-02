@@ -22,3 +22,19 @@ export const LinkWrap = styled(Link)`
     color: white;
   }
 `;
+
+export const BackLinkWrap = styled(LinkWrap)`
+  position: absolute;
+  left: 20%;
+  top: 55%;
+  transform: translateY(-50%);
+
+  @media ${({ theme }) => theme.media.medium} {
+    position: static;
+  }
+`;
+
+export const BackLinkWrapNotFound = styled(BackLinkWrap)`
+  left: 0;
+  top: 100%;
+`;

@@ -10,7 +10,7 @@ import {
   PicText,
   PicWrapper,
 } from "./Gallery.style";
-import { LinkWrap } from "../navbar/Navbar.style";
+import { BackLinkWrap, BackLinkWrapNotFound } from "../navbar/Navbar.style";
 
 export interface IProps {
   fetch: () => Promise<void>;
@@ -21,8 +21,8 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
   const { setStrokeColor, setFillColor, setLineWidth } = useActions();
 
   const reloadHandler = () => {
-    window.location.reload()
-  }
+    window.location.reload();
+  };
 
   useEffect(() => {
     fetch();
@@ -30,29 +30,35 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
     setFillColor("white");
     setLineWidth(1);
     brushAction();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <GalleryWrapper>
       {users.length > 0 ? (
-        users.map((user: UsersDataType) => (
-          <PicWrapper key={user.image}>
-            <img
-              style={{ background: "white" }}
-              src={user.image}
-              width={250}
-              height={200}
-              alt=""
-            />
-            <PicText>{user.username}</PicText>
-          </PicWrapper>
-        ))
+        <>
+          {users.map((user: UsersDataType) => (
+            <PicWrapper key={user.image}>
+              <img
+                style={{ background: "white" }}
+                src={user.image}
+                width={250}
+                height={200}
+                alt=""
+              />
+              <PicText>{user.username}</PicText>
+            </PicWrapper>
+          ))}
+          <BackLinkWrap to="/" onClick={reloadHandler}>
+            {"< Gallery"}
+          </BackLinkWrap>
+        </>
       ) : (
         <NotFoundWrap>
           <h2>Pictures not found...</h2>
-          <LinkWrap to="/" onClick={reloadHandler}>
-            Back to gallery
-          </LinkWrap>
+          <BackLinkWrapNotFound to="/" onClick={reloadHandler}>
+            {"< Gallery"}
+          </BackLinkWrapNotFound>
         </NotFoundWrap>
       )}
     </GalleryWrapper>
